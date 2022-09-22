@@ -6,61 +6,65 @@ using System.Threading.Tasks;
 
 namespace Algorithm
 {
-    internal class Algo
-    {
-        public static string[] MergeSort(String[] a, int lb, int ub)
+    
+        public class Algo<T> where T : IComparable
         {
-            if (lb < ub)
-            {
-                int mid = (lb + ub) / 2;
-                MergeSort(a, lb, mid);                        //first array
-                MergeSort(a, mid + 1, ub);                  //second array
-                merge(a, lb, mid, ub);                      //merging both the sorted arrays
-            }
-            return a;
+            public void sortAndCall(T[] sentence, T find)
+        {
+            Array.Sort(sentence);
+            Algo<T>.search(sentence, find);
         }
-        public static void merge(String[] a, int lb, int mid, int ub)
+        public static void search(T[] sen, T find)
         {
-            string[] b = new string[a.Length];
-            int i = lb;                      //index for the first part of the array
-            int j = mid + 1;                //for the second part of the array
-            int k = lb;                     //index number for the new array formed
-            while (i <= mid && j <= ub)
+            int min = 0;
+            int max = sen.Length - 1;
+            int flag = 0;
+            while (min <= max)
             {
-                if (a[i].CompareTo(a[j]) <= 0)                 //if second array has greater element than the first array element
+                int mid = (min + max) / 2;
+                if (sen[mid].CompareTo(find) == 0)
                 {
-                    b[k] = a[i];
-                    i++;
+                    flag = 1;
+                    Console.WriteLine("Found at " + mid + " position ");
+                    break;
                 }
-                else                                         //if first array has greater element than the seconds array element
+                else if (sen[mid].CompareTo(find) > 0)
                 {
-                    b[k] = a[j];
-                    j++;
+                    max = mid - 01;
                 }
-                k++;                                    //third array element index incemented
-            }
-            if (i > mid)                                //if first array has fully been copied but second hasn't
-            {
-                while (j <= ub)
+                else
                 {
-                    b[k] = a[j];
-                    j++;
-                    k++;
+                    min = mid + 1;
                 }
             }
-            else if (j > ub)                            //if second array has fully been copied but first hasn't
+            if (flag == 0)
             {
-                while (i <= mid)
+                Console.WriteLine("Not found");
+            }
+        }
+        public static void insertionSort(T[] sentence)
+        {
+            for (int x = 1; x < (sentence.Length) - 1; x++)
+            {
+                int i = x;
+                T t = sentence[x];
+                while (sentence[i - 1].CompareTo(t) > 0)
                 {
-                    b[k] = a[i];
-                    i++;
-                    k++;
+                    sentence[i] = sentence[i - 1];
+                    i--;
+                    if (i == 0)
+                    {
+                        break;
+                    }
                 }
+                sentence[i] = t;
             }
-            for (int x = lb; x <= ub; x++)                 //coping data from b array to the first array
+            Console.WriteLine();
+            for (int x = 0; x < sentence.Length; x++)
             {
-                a[x] = b[x];
+                Console.Write(sentence[x] + " ");
             }
+
         }
     }
 }
