@@ -8,22 +8,38 @@ namespace Algorithm
 {
     internal class Algo
     {
-        public static void permutation(String fix, String s)
+        public static void sortAndCall(String sentence, String find)         //find specifies the word to be searched
         {
-            int l = s.Length;
-            if (l == 1)
+            String[] words = sentence.Split(' ');          //storing the string in an array of strings
+            Array.Sort(words);
+            Algo.search(words, find);                    //calling the searching function
+        }
+        public static void search(String[] sen, String find)         //Binary Search
+        {
+            int min = 0;
+            int max = sen.Length - 1;
+            int flag = 0;
+            while (min <= max)
             {
-                Console.WriteLine(fix + s);
-            }
-            else
-            {
-                for (int i = 0; i < l; i++)
+                int mid = (min + max) / 2;
+                if (sen[mid].CompareTo(find) == 0)
                 {
-                    char[] mychar = s.ToCharArray();
-                    char c = mychar[i];
-                    String st = s.Substring(0, i) + s.Substring(i + 1);
-                    permutation(fix + c, st);
+                    flag = 1;
+                    Console.WriteLine("Found at " + mid + " position ");
+                    break;
                 }
+                else if (sen[mid].CompareTo(find) > 0)
+                {
+                    max = mid - 01;
+                }
+                else
+                {
+                    min = mid + 1;
+                }
+            }
+            if (flag == 0)
+            {
+                Console.WriteLine("Not found");
             }
         }
     }
