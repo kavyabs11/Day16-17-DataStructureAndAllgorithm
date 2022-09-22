@@ -1,2 +1,6 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using Algorithm;
+
+Console.WriteLine("Hello, to the algorithm and data structure problems");
+Console.WriteLine("Enter a word which you wantto permute");
+String s = Console.ReadLine();
+Algo.permutation("", s);
