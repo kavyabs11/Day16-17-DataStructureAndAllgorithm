@@ -8,37 +8,19 @@ namespace Algorithm
 {
     internal class Algo
     {
-        static List<String> words = new List<String>();
-        string find;
-        string Anagram;
-        public Algo(String find, string Anagram)
+        public static void prime(int num)
         {
-            this.find = find;
-            this.Anagram = Anagram;
-        }
-        public void anagram(String fix, String s)
-        {
-            int l = s.Length;
-            if (l == 1)
+            int Count = 0;                              //counter for number of factors
+            for (int i = 2; i < num / 2; i++)
             {
-                // Console.WriteLine(fix + s);
-                if ((fix + s).CompareTo(find) == 0)
+                if (num % i == 0)
                 {
-                    Console.WriteLine(find + " is an anagram of " + Anagram);
-                }
-                else
-                    Console.WriteLine(find + " is not an anagram of " + Anagram);
-            }
-            else
-            {
-                for (int i = 0; i < l; i++)
-                {
-                    char[] mychar = s.ToCharArray();
-                    char c = mychar[i];
-                    String st = s.Substring(0, i) + s.Substring(i + 1);
-                    anagram(fix + c, st);
+                    Count++;
+                    break;
                 }
             }
+            if (Count == 0)
+                Console.WriteLine(num + " ");
         }
     }
 }
