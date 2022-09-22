@@ -8,30 +8,21 @@ namespace Algorithm
 {
     internal class Algo
     {
-        public static void insertionSort(String SENTENCE)
+        public static int[] bubbleSort(int[] array)                     //bubble sort an integer array
         {
-            String[] sentence = SENTENCE.Split(' ');
-            for (int x = 1; x < (sentence.Length) - 1; x++)
+            for (int i = 0; i < array.Length; i++)
             {
-                int i = x;
-                String t = sentence[x];
-                while (sentence[i - 1].CompareTo(t) > 0)
+                for (int j = 0; j < array.Length - 1; j++)
                 {
-                    sentence[i] = sentence[i - 1];
-                    i--;
-                    if (i == 0)
+                    if (array[j] > array[j + 1])
                     {
-                        break;
+                        int tempo = array[j];
+                        array[j] = array[j + 1];
+                        array[j + 1] = tempo; ;
                     }
                 }
-                sentence[i] = t;
             }
-            Console.WriteLine();
-            for (int x = 0; x < sentence.Length; x++)
-            {
-                Console.Write(sentence[x] + " ");
-            }
-
+            return array;
         }
     }
 }
