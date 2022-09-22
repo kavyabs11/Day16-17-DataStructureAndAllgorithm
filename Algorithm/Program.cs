@@ -1,13 +1,9 @@
 ﻿using Algorithm;
 
 Console.WriteLine("Hello, to the algorithm and data structure problems");
-Console.WriteLine("Enter a sentence");
+Console.WriteLine("Enter a word whose anagram you want");
 String s = Console.ReadLine();
-String[] array = s.Split(' ');
-Console.WriteLine();
-string[] newArray = Algo.MergeSort(array, 0, array.Length - 1);
-Console.WriteLine("New Array -");
-for (int i = 0; i < array.Length; i++)
-{
-    Console.Write(newArray[i] + " ");
-}
+Console.WriteLine("Enter the word you want to check for");
+String find = Console.ReadLine();
+Algo obj = new Algo(find, s);
+obj.anagram("", s);

@@ -8,58 +8,36 @@ namespace Algorithm
 {
     internal class Algo
     {
-        public static string[] MergeSort(String[] a, int lb, int ub)
+        static List<String> words = new List<String>();
+        string find;
+        string Anagram;
+        public Algo(String find, string Anagram)
         {
-            if (lb < ub)
-            {
-                int mid = (lb + ub) / 2;
-                MergeSort(a, lb, mid);                        //first array
-                MergeSort(a, mid + 1, ub);                  //second array
-                merge(a, lb, mid, ub);                      //merging both the sorted arrays
-            }
-            return a;
+            this.find = find;
+            this.Anagram = Anagram;
         }
-        public static void merge(String[] a, int lb, int mid, int ub)
+        public void anagram(String fix, String s)
         {
-            string[] b = new string[a.Length];
-            int i = lb;                      //index for the first part of the array
-            int j = mid + 1;                //for the second part of the array
-            int k = lb;                     //index number for the new array formed
-            while (i <= mid && j <= ub)
+            int l = s.Length;
+            if (l == 1)
             {
-                if (a[i].CompareTo(a[j]) <= 0)                 //if second array has greater element than the first array element
+                // Console.WriteLine(fix + s);
+                if ((fix + s).CompareTo(find) == 0)
                 {
-                    b[k] = a[i];
-                    i++;
+                    Console.WriteLine(find + " is an anagram of " + Anagram);
                 }
-                else                                         //if first array has greater element than the seconds array element
-                {
-                    b[k] = a[j];
-                    j++;
-                }
-                k++;                                    //third array element index incemented
+                else
+                    Console.WriteLine(find + " is not an anagram of " + Anagram);
             }
-            if (i > mid)                                //if first array has fully been copied but second hasn't
+            else
             {
-                while (j <= ub)
+                for (int i = 0; i < l; i++)
                 {
-                    b[k] = a[j];
-                    j++;
-                    k++;
+                    char[] mychar = s.ToCharArray();
+                    char c = mychar[i];
+                    String st = s.Substring(0, i) + s.Substring(i + 1);
+                    anagram(fix + c, st);
                 }
-            }
-            else if (j > ub)                            //if second array has fully been copied but first hasn't
-            {
-                while (i <= mid)
-                {
-                    b[k] = a[i];
-                    i++;
-                    k++;
-                }
-            }
-            for (int x = lb; x <= ub; x++)                 //coping data from b array to the first array
-            {
-                a[x] = b[x];
             }
         }
     }
